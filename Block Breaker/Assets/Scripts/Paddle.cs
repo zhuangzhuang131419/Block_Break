@@ -8,12 +8,16 @@ public class Paddle : MonoBehaviour {
     [SerializeField] float minX = 1f;
     [SerializeField] float maxX = 15f;
     [SerializeField] float screenWidthInUnits = 16f;
-    
+
+    // cached references
+    GameSession theGameSession;
+    Ball theBall;
 
     // Use this for initialization
     void Start () {
-		
-	}
+        theGameSession = FindObjectOfType<GameSession>();
+        theBall = FindObjectOfType<Ball>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -24,9 +28,9 @@ public class Paddle : MonoBehaviour {
 
     private float GetXPos()
     {
-        if (FindObjectOfType<GameSession>().IsAutoPlayEnabled())
+        if (theGameSession.IsAutoPlayEnabled())
         {
-            return FindObjectOfType<Ball>().transform.position.x;
+            return theBall.transform.position.x;
         }
         else
         {
